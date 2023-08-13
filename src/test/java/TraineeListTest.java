@@ -49,7 +49,9 @@ class TraineeListTest {
     }
 
     @Test
-    void get() {
+    void testGetElementByIndex() {
+        IntStream.range(1, 6).forEach(integerTraineeList::add);
+        assertEquals(5, integerTraineeList.get(4), "Element with index 4 must be 5");
     }
 
     @Test
@@ -65,6 +67,8 @@ class TraineeListTest {
     }
 
     @Test
-    void size() {
+    void testSize() {
+        IntStream.range(1, 101).forEach(integerTraineeList::add);
+        assertEquals(100, integerTraineeList.size(), "integerTraineeList must contain 100 elements");
     }
 }
