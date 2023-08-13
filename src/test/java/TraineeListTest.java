@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.stream.IntStream;
@@ -18,6 +19,7 @@ class TraineeListTest {
     }
 
     @Test
+    @DisplayName("Add Integer elements")
     void testAddWhenIntegerElements() {
         IntStream.range(1, 12).forEach(integerTraineeList::add);
 
@@ -31,7 +33,8 @@ class TraineeListTest {
         );
     }
 
-    @Test
+    @Test()
+    @DisplayName("Add String elements")
     void testAddWhenStringElements() {
         IntStream.range(1, 12)
                 .mapToObj(n -> "line " + n)
@@ -49,6 +52,7 @@ class TraineeListTest {
     }
 
     @Test
+    @DisplayName("Get element by index")
     void testGetElementByIndex() {
         IntStream.range(1, 6).forEach(integerTraineeList::add);
         assertEquals(5, integerTraineeList.get(4), "Element with index 4 must be 5");
@@ -67,6 +71,7 @@ class TraineeListTest {
     }
 
     @Test
+    @DisplayName("Get size of TraineeList")
     void testSize() {
         IntStream.range(1, 101).forEach(integerTraineeList::add);
         assertEquals(100, integerTraineeList.size(), "integerTraineeList must contain 100 elements");
