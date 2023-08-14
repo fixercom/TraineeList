@@ -25,7 +25,7 @@ public class TraineeList<E> implements LiteList<E> {
         if (internalArray.length == size) {
             expandInternalArray();
         }
-        moveToRightStaringFrom(index);
+        moveToRightStartingFrom(index);
         internalArray[index] = element;
         size++;
     }
@@ -43,7 +43,7 @@ public class TraineeList<E> implements LiteList<E> {
     public boolean remove(E element) {
         for (int index = 0; index < size; index++) {
             if (internalArray[index].equals(element)) {
-                moveToLeftStaringFrom(index);
+                moveToLeftStartingFrom(index);
                 size--;
                 return true;
             }
@@ -71,13 +71,13 @@ public class TraineeList<E> implements LiteList<E> {
         internalArray = Arrays.copyOf(internalArray, newLength);
     }
 
-    private void moveToRightStaringFrom(int index) {
+    private void moveToRightStartingFrom(int index) {
         for (int i = size - 1; i >= index; i--) {
             internalArray[i + 1] = internalArray[i];
         }
     }
 
-    private void moveToLeftStaringFrom(int index) {
+    private void moveToLeftStartingFrom(int index) {
         for (int i = index; i < size - 1; i++) {
             internalArray[i] = internalArray[i + 1];
         }
