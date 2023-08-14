@@ -52,6 +52,25 @@ class TraineeListTest {
     }
 
     @Test
+    @DisplayName("Add element by index")
+    void testAddElementByIndex() {
+        IntStream.range(1, 11).forEach(integerTraineeList::add);
+        integerTraineeList.add(5, 999);
+        assertAll(
+                () -> assertEquals(11, integerTraineeList.size(),
+                        "List must contain 11 elements"),
+                () -> assertEquals(999, integerTraineeList.get(5),
+                        "Element with index 5 must be equal 999"),
+                () -> assertEquals(6, integerTraineeList.get(6),
+                        "Element with index 6 must be equal 6"),
+                () -> assertEquals(10, integerTraineeList.get(10),
+                        "Element with index 10 must be equal 10"),
+                () -> assertEquals(5, integerTraineeList.get(4),
+                        "Element with index 4 must be equal 5")
+        );
+    }
+
+    @Test
     @DisplayName("Get element by index")
     void testGetElementByIndex() {
         IntStream.range(1, 6).forEach(integerTraineeList::add);
