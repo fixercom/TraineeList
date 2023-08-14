@@ -53,7 +53,8 @@ public class TraineeList<E> implements LiteList<E> {
 
     @Override
     public void clear() {
-
+        internalArray = new Object[INIT_CAPACITY];
+        size = 0;
     }
 
     @Override

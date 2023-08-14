@@ -105,7 +105,19 @@ class TraineeListTest {
     }
 
     @Test
+    @DisplayName("Clear list")
     void clear() {
+        IntStream.range(1, 6).forEach(integerTraineeList::add);
+
+        assertEquals(5, integerTraineeList.size(), "List must contain 5 elements");
+
+        integerTraineeList.clear();
+
+        assertAll(
+                () -> assertEquals(0, integerTraineeList.size(), "List must contain 0 elements"),
+                () -> assertThrows(IndexOutOfBoundsException.class, () -> integerTraineeList.get(0),
+                        "method integerTraineeList.get() with index 0 must throw IndexOutOfBoundsException")
+        );
     }
 
     @Test
