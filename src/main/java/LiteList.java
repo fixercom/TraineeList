@@ -1,3 +1,5 @@
+import java.util.Comparator;
+
 public interface LiteList<E> {
 
     void add(E element);
@@ -10,7 +12,7 @@ public interface LiteList<E> {
 
     void clear();
 
-    void sort();
+    void sort(Comparator<E> comparator);
 
     int size();
 

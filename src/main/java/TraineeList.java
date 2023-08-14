@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class TraineeList<E> implements LiteList<E> {
 
@@ -58,8 +59,9 @@ public class TraineeList<E> implements LiteList<E> {
     }
 
     @Override
-    public void sort() {
-
+    @SuppressWarnings("unchecked")
+    public void sort(Comparator<E> comparator) {
+        QuickSort.sort((E[]) internalArray, 0, size - 1, comparator);
     }
 
     @Override

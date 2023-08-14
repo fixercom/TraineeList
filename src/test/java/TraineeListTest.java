@@ -2,6 +2,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Comparator;
 import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -122,6 +123,42 @@ class TraineeListTest {
 
     @Test
     void sort() {
+        integerTraineeList.add(999);
+        integerTraineeList.add(1);
+        integerTraineeList.add(18);
+        integerTraineeList.add(7);
+        integerTraineeList.add(633);
+        integerTraineeList.add(5);
+        integerTraineeList.add(4);
+
+        for (int i = 0; i < integerTraineeList.size(); i++) {
+            System.out.print(integerTraineeList.get(i) + " ");
+        }
+        System.out.println();
+
+        integerTraineeList.sort(Comparator.comparingInt(o -> o));
+
+        for (int i = 0; i < integerTraineeList.size(); i++) {
+            System.out.print(integerTraineeList.get(i) + " ");
+        }
+
+        stringTraineeList.add("short");
+        stringTraineeList.add("add");
+        stringTraineeList.add("contribution");
+        stringTraineeList.add("deserve");
+
+        System.out.println();
+
+        for (int i = 0; i < stringTraineeList.size(); i++) {
+            System.out.print(stringTraineeList.get(i) + " ");
+        }
+
+        stringTraineeList.sort(Comparator.comparingInt(String::length));
+        System.out.println();
+
+        for (int i = 0; i < stringTraineeList.size(); i++) {
+            System.out.print(stringTraineeList.get(i) + " ");
+        }
     }
 
     @Test
