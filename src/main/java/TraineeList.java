@@ -33,11 +33,21 @@ public class TraineeList<E> implements LiteList<E> {
     @Override
     @SuppressWarnings("unchecked")
     public E get(int index) {
+        if (index >= size || index < 0) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
+        }
         return (E) internalArray[index];
     }
 
     @Override
     public boolean remove(E element) {
+        for (int index = 0; index < size; index++) {
+            if (internalArray[index].equals(element)) {
+                moveToLeftStaringFrom(index);
+                size--;
+                return true;
+            }
+        }
         return false;
     }
 
@@ -64,6 +74,12 @@ public class TraineeList<E> implements LiteList<E> {
     private void moveToRightStaringFrom(int index) {
         for (int i = size - 1; i >= index; i--) {
             internalArray[i + 1] = internalArray[i];
+        }
+    }
+
+    private void moveToLeftStaringFrom(int index) {
+        for (int i = index; i < size - 1; i++) {
+            internalArray[i] = internalArray[i + 1];
         }
     }
 
