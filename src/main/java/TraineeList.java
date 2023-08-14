@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class TraineeList<E> implements LiteList<E> {
 
     private static final int INIT_CAPACITY = 10;
@@ -20,7 +22,12 @@ public class TraineeList<E> implements LiteList<E> {
 
     @Override
     public void add(int index, E element) {
-
+        if (internalArray.length == size) {
+            expandInternalArray();
+        }
+        moveToRightStaringFrom(index);
+        internalArray[index] = element;
+        size++;
     }
 
     @Override
@@ -50,10 +57,14 @@ public class TraineeList<E> implements LiteList<E> {
     }
 
     private void expandInternalArray() {
-        int length = (int) (internalArray.length * MAGNIFICATION_FACTOR);
-        Object[] expandedArray = new Object[length];
-        System.arraycopy(internalArray, 0, expandedArray, 0, size);
-        internalArray = expandedArray;
+        int newLength = (int) (internalArray.length * MAGNIFICATION_FACTOR);
+        internalArray = Arrays.copyOf(internalArray, newLength);
+    }
+
+    private void moveToRightStaringFrom(int index) {
+        for (int i = size - 1; i >= index; i--) {
+            internalArray[i + 1] = internalArray[i];
+        }
     }
 
 }
