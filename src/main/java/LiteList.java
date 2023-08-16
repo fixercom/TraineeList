@@ -82,4 +82,27 @@ public interface LiteList<E> {
      */
     int size();
 
+    /**
+     * Trims the capacity of this {@code TraineeList} instance to be the
+     * list's current size.  An application can use this operation to minimize
+     * the storage of an {@code TraineeList} instance.
+     */
+    void trimCapacityToSize();
+
+    /**
+     * Increases the capacity of this {@code ArrayList} instance, if
+     * necessary, to ensure that it can hold at least the number of elements
+     * specified by the minimum capacity argument.
+     *
+     * @param minCapacity the desired minimum capacity
+     */
+    void ensureCapacity(int minCapacity);
+
+    /**
+     * Returns the current capacity value of the internal array
+     *
+     * @return the current capacity value of the internal array
+     */
+    int getCapacity();
+
 }

@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TraineeListTest {
 
-    private TraineeList<Integer> integerTraineeList;
-    private TraineeList<String> stringTraineeList;
+    private LiteList<Integer> integerTraineeList;
+    private LiteList<String> stringTraineeList;
 
     @BeforeEach
     void init() {
@@ -148,5 +148,41 @@ class TraineeListTest {
         IntStream.range(1, 101).forEach(integerTraineeList::add);
 
         assertEquals(100, integerTraineeList.size(), "integerTraineeList must contain 100 elements");
+    }
+
+    @Test
+    @DisplayName("Capacity constructor")
+    void testCapacityConstructor() {
+        LiteList<Integer> liteList = new TraineeList<>(100);
+
+        assertEquals(100, liteList.getCapacity(), "The capacity must be equal 100");
+    }
+
+    @Test
+    @DisplayName("Trim capacity to size")
+    void testTrimCapacityToSize() {
+        IntStream.range(1, 6).forEach(integerTraineeList::add);
+
+        assertAll(
+                () -> assertEquals(5, integerTraineeList.size(),
+                        "List must contain 5 elements"),
+                () -> assertEquals(10, integerTraineeList.getCapacity(),
+                        "Capacity of list must be equal 10")
+        );
+
+        integerTraineeList.trimCapacityToSize();
+
+        assertEquals(5, integerTraineeList.getCapacity(), "Capacity of the list must be equal 5");
+    }
+
+    @Test
+    @DisplayName("Ensure capacity")
+    void testEnsureCapacity() {
+
+        assertEquals(10, integerTraineeList.getCapacity(), "Capacity of list must be equal 10");
+
+        integerTraineeList.ensureCapacity(15);
+
+        assertEquals(15, integerTraineeList.getCapacity(), "Capacity of list must be equal 15");
     }
 }

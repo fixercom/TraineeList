@@ -29,14 +29,28 @@ public class TraineeList<E> implements LiteList<E> {
     /**
      * The size of the TraineeList (the number of elements it contains).
      */
-    private int size;
+    private int size = 0;
 
     /**
      * Constructs an empty list with an initial capacity of ten.
      */
     public TraineeList() {
         internalArray = new Object[INIT_CAPACITY];
-        size = 0;
+    }
+
+    /**
+     * Constructs an empty list with the specified initial capacity.
+     *
+     * @param initialCapacity the initial capacity of the list
+     * @throws IllegalArgumentException if the specified initial capacity
+     *                                  is negative or zero
+     */
+    public TraineeList(int initialCapacity) {
+        if (initialCapacity > 0) {
+            internalArray = new Object[initialCapacity];
+        } else {
+            throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity);
+        }
     }
 
     /**
@@ -115,7 +129,6 @@ public class TraineeList<E> implements LiteList<E> {
      */
     @Override
     public void clear() {
-        internalArray = new Object[INIT_CAPACITY];
         size = 0;
     }
 
@@ -141,8 +154,44 @@ public class TraineeList<E> implements LiteList<E> {
         return size;
     }
 
+    /**
+     * Trims the capacity of this {@code TraineeList} instance to be the
+     * list's current size.  An application can use this operation to minimize
+     * the storage of an {@code TraineeList} instance.
+     */
+    @Override
+    public void trimCapacityToSize() {
+        if (size < internalArray.length) {
+            internalArray = Arrays.copyOf(internalArray, size);
+        }
+    }
+
+    /**
+     * Increases the capacity of this {@code TraineeList} instance, if
+     * necessary, to ensure that it can hold at least the number of elements
+     * specified by the minimum capacity argument.
+     *
+     * @param minCapacity the desired minimum capacity
+     */
+    @Override
+    public void ensureCapacity(int minCapacity) {
+        if (minCapacity > internalArray.length) {
+            internalArray = Arrays.copyOf(internalArray, minCapacity);
+        }
+    }
+
+    /**
+     * Returns the current capacity value of the internal array
+     *
+     * @return the current capacity value of the internal array
+     */
+    @Override
+    public int getCapacity() {
+        return internalArray.length;
+    }
+
     private void expandInternalArray() {
-        int newLength = (int) (internalArray.length * MAGNIFICATION_FACTOR);
+        int newLength = (int) Math.round(internalArray.length * MAGNIFICATION_FACTOR);
         internalArray = Arrays.copyOf(internalArray, newLength);
     }
 
